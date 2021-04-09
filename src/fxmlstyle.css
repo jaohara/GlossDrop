@@ -1,0 +1,163 @@
+/*
+    ===============================
+        OVERALL STRUCTURE STUFF
+    ===============================
+*/
+
+/*
+    The "Ur-Blue": #3498db;
+*/
+
+.root {
+    -fx-background: #14161b;
+    /*-fx-font-family: "Source Code Pro";*/
+    -fx-font-size: 12px;
+    -fx-focus-color: #3498db;
+    -fx-text-base-color: #eeeeee;
+}
+
+/*
+    ========================================
+        BUTTONS (and button-like things)
+    ========================================
+*/
+
+.button, .toggle-button, .color-picker , .choice-box {
+    -fx-background-color: #282c34;
+    -fx-mark-color: #eeeeee;
+    -fx-text-inner-color: #eeeeee;
+}
+
+.button:hover, .toggle-button:hover, .color-picker:hover, .choice-box:hover{
+    -fx-background-color: #40434a;
+    -fx-cursor: pointer;
+}
+
+.toggle-button:selected{
+    -fx-background-color: -fx-focus-color;
+}
+
+.color-picker .arrow-button .arrow {
+    -fx-background-color: #eeeeee;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: #282c34;
+    -fx-background-radius: 3 3 3 3;
+    -fx-padding: .5em;
+}
+
+.choice-box .menu-item:focused{
+    -fx-background-color: #3498db;
+    -fx-background-radius: 3 3 3 3;
+}
+
+/*
+    ==================
+        CHECKBOXES
+    ==================
+*/
+
+.check-box .box {
+    -fx-background-color: #282c34;
+}
+
+.check-box:hover .box {
+    -fx-background-color: #40434a;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #3498db;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: -fx-background;
+}
+
+/*
+    ================
+        SPINNERS
+    ================
+*/
+
+.spinner {
+    -fx-body-color: #3498db;
+    -fx-border: 0px;
+    -fx-border-width: 0, 0, 0, 0;
+    -fx-color: #1b1d24;
+    -fx-text-inner-color: #eeeeee;
+}
+
+.spinner:disabled {
+    -fx-background-color: #282c34;
+    -fx-body-color: #282c34;
+    -fx-opacity: .3;
+}
+
+.spinner .text-field, .spinner:disabled .text-field{
+    -fx-alignment: center;
+    -fx-background-color: #282c34;
+}
+
+.spinner:hover .text-field{
+    -fx-background-color: #40434a;
+}
+
+.spinner .increment-arrow-button{
+    -fx-background-radius: 0 3 0 0;
+    -fx-background-insets: 0 0 -1 0;
+}
+.spinner .decrement-arrow-button{
+    -fx-background-radius: 0 0 3 0;
+    -fx-background-insets: -1 0 0 0;
+}
+
+.spinner:hover .increment-arrow-button .increment-arrow,
+.spinner:hover .decrement-arrow-button .decrement-arrow{
+
+}
+
+/*
+    ==================
+        RIGHT VBOX
+    ==================
+*/
+
+#glosscillatorsVBox {
+    /* todo: uncomment after testing */
+    /*visibility: hidden;*/
+    -fx-background-color: #14161b;
+    -fx-padding: 20px;
+}
+
+#colorCyclersVBox {
+    -fx-alignment: center;
+    -fx-spacing: 15px;
+}
+
+.glosscillator-pane {
+    -fx-background-color: #282c34;
+    -fx-background-radius: 3 3 3 3;
+    -fx-padding: 10 10 10 10;
+    -fx-spacing: 10px;
+}
+
+.glosscillator-pane HBox {
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}
+.slider .thumb {
+    -fx-background-color: #3498db;;
+}
+
+.slider .track {
+    -fx-background-color: #40434a;;
+}
+
+.amplitude-label {
+    -fx-font-size: 0.8em;
+}
+
+.glosscillator-label {
+    -fx-font-weight: bold;
+}

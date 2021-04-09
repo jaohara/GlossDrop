@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="960.0" prefWidth="1280.0" stylesheets="@fxmlstyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FractalGenGUIController">
+   <center>
+      <Canvas fx:id="canvas" height="868.0" onMouseClicked="#dragCanvasStart" onMouseDragged="#dragCanvasOrigin" onMousePressed="#dragCanvasStart" onScroll="#zoomListener" width="1280.0" BorderPane.alignment="TOP_LEFT" />
+   </center>
+   <top>
+      <HBox prefHeight="32.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="26.0" text="Nodes:" textAlignment="CENTER" />
+            <Spinner fx:id="childCountSpinner" editable="true" prefWidth="64.0">
+               <HBox.margin>
+                  <Insets left="5.0" right="15.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="Controls the number of children that recurse out from each fractal element." />
+               </tooltip>
+            </Spinner>
+
+
+            <Label alignment="CENTER" layoutX="328.0" layoutY="20.0" prefHeight="26.0" text="Depth:" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Label>
+            <Spinner fx:id="recursionDepthSpinner" editable="true" layoutX="408.0" layoutY="20.0" prefWidth="64.0">
+               <HBox.margin>
+                  <Insets left="5.0" right="15.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="Number of levels to recurse. Greatly increases render time." />
+               </tooltip>
+            </Spinner>
+
+
+            <Label alignment="CENTER" layoutX="20.0" layoutY="20.0" prefHeight="26.0" text="Node Ratio:" textAlignment="CENTER" />
+            <Spinner fx:id="childRatioSpinner" editable="true" layoutX="110.0" layoutY="20.0" prefWidth="78.0">
+               <HBox.margin>
+                  <Insets left="5.0" right="15.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="The ratio of each fractal element's radius to its parent's radius as a percentage." />
+               </tooltip>
+            </Spinner>
+
+
+            <Label alignment="CENTER" layoutX="184.0" layoutY="20.0" prefHeight="26.0" text="Initial Radius:" textAlignment="CENTER" />
+            <Spinner fx:id="initialRadiusSpinner" editable="true" layoutX="264.0" layoutY="20.0" prefWidth="78.0">
+               <HBox.margin>
+                  <Insets left="5.0" right="15.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="Radius of the initial fractal element in pixels." />
+               </tooltip>
+            </Spinner>
+
+            <Label alignment="CENTER" layoutX="494.0" layoutY="20.0" prefHeight="26.0" text="Line Width:" textAlignment="CENTER" />
+            <Spinner fx:id="strokeWidthSpinner" editable="true" layoutX="599.0" layoutY="20.0" prefWidth="78.0">
+               <tooltip>
+                  <Tooltip text="Size of the shape outlines in pixels." />
+               </tooltip>
+               <HBox.margin>
+                  <Insets left="5.0" right="15.0" />
+               </HBox.margin>
+            </Spinner>
+            <CheckBox fx:id="hideTethersCheckBox" mnemonicParsing="false" onAction="#handleValueChange" text="Hide Lines">
+               <HBox.margin>
+                  <Insets right="15.0" top="4.0" />
+               </HBox.margin>
+            </CheckBox>
+            
+            <ToggleButton fx:id="pauseRenderToggleButton" mnemonicParsing="false" onAction="#handleValueChange" text="Pause Render">
+               <HBox.margin>
+                  <Insets left="5.0" right="15.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="Pauses re-rendering on property change." />
+               </tooltip>
+            </ToggleButton>
+            <ToggleButton fx:id="glosscillatorsToggleButton" mnemonicParsing="false" onAction="#toggleGlosscillatorVisibility" text="glosscillators">
+               <tooltip>
+                  <Tooltip text="Settings for automating modulation of certain properties." />
+               </tooltip>
+            </ToggleButton>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </top>
+   <bottom>
+      <HBox prefHeight="24.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="26.0" text="Foreground:" />
+            <ColorPicker fx:id="fgColorPicker" maxWidth="90.0" onAction="#handleValueChange" promptText="Foreground Color" styleClass="button">
+               <value>
+                  <Color red="0.20392157137393951" green="0.5960784554481506" blue="0.8588235378265381" />
+               </value>
+               <HBox.margin>
+                  <Insets left="5.0" right="15.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="The color of the drawn fractal." />
+               </tooltip>
+            </ColorPicker>
+            <Label prefHeight="26.0" text="Background:" />
+            <ColorPicker fx:id="bgColorPicker" maxWidth="90.0" onAction="#handleValueChange" promptText="Background Color" styleClass="button">
+               <HBox.margin>
+                  <Insets left="5.0" right="15.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="The background color of the canvas that the fractal is drawn to." />
+               </tooltip>
+               <value>
+                  <Color red="0.0784313753247261" green="0.08627451211214066" blue="0.10588235408067703" />
+               </value></ColorPicker>
+
+            <CheckBox fx:id="fillElementsCheckBox" mnemonicParsing="false" onAction="#handleValueChange" text="Fill">
+               <tooltip>
+                  <Tooltip text="Determines whether drawn elements are filled or outlines." />
+               </tooltip>
+               <HBox.margin>
+                  <Insets right="15.0" top="4.0" />
+               </HBox.margin>
+            </CheckBox>
+            <CheckBox fx:id="decayColorCheckBox" layoutX="390.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleValueChange" text="Decay Color">
+               <tooltip>
+                  <Tooltip text="Determines whether drawn elements are filled or outlines." />
+               </tooltip>
+               <HBox.margin>
+                  <Insets right="15.0" top="4.0" />
+               </HBox.margin>
+            </CheckBox>
+
+            <CheckBox fx:id="decayOpacityCheckBox" mnemonicParsing="false" onAction="#handleValueChange" text="Decay Opacity">
+               <HBox.margin>
+                  <Insets top="4.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="Whether or not opacity of the fractal elements decays with each successive recursion level." />
+               </tooltip>
+            </CheckBox>
+
+
+            <Spinner fx:id="decayOpacitySpinner" disable="true" editable="true" prefWidth="64.0">
+               <HBox.margin>
+                  <Insets left="5.0" right="15.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="The final opacity as a percentage that the opacity will decay to." />
+               </tooltip>
+            </Spinner>
+
+            <CheckBox fx:id="electricKoolAidCheckBox" mnemonicParsing="false" onAction="#handleValueChange" text="Electric Kool-Aid">
+               <HBox.margin>
+                  <Insets right="15.0" top="4.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="Renders each fractal element as a random color. Overrides foreground color setting." />
+               </tooltip>
+            </CheckBox>
+            <Label fx:id="elementCountLabel" prefHeight="26.0" text="0 elements">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="drawCountLabel" prefHeight="26.0" text="0 drawn">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="zoomLabel" prefHeight="26.0" text="100% Zoom">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></HBox>
+   </bottom>
+   <right>
+      <VBox fx:id="glosscillatorsVBox" minWidth="-Infinity" opacity="0.95" prefHeight="200.0" prefWidth="260.0" visible="false" BorderPane.alignment="CENTER">
+         <children>
+            <VBox fx:id="colorCyclersVBox">
+               <children>
+                  <ToggleButton mnemonicParsing="false" onAction="#toggleFgCycler" prefWidth="132.0" text="Cycle Foreground">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ToggleButton>
+                  <ToggleButton mnemonicParsing="false" onAction="#toggleBgCycler" prefWidth="132.0" text="Cycle Background" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="10.0" right="10.0" />
+               </VBox.margin>
+            </VBox>
+            <HBox prefHeight="24.0" prefWidth="200.0">
+               <children>
+                  <ChoiceBox fx:id="glosscillatorsChoiceBox" prefWidth="150.0">
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </ChoiceBox>
+                  <Button fx:id="glosscillatorAddButton" mnemonicParsing="false" onAction="#addGlosscillator" text="Add" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>
